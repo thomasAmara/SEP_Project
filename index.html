@@ -60,6 +60,17 @@
       button:hover {
         background-color: #45a049;
       }
+      button.cancel-button {
+        background-color: #e74c3c;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button.cancel-button:hover {
+        background-color: #c0392b;
+      }
 
       button.remove-button {
         background-color: #e74c3c; /* Red color, you can change it to your preferred color */
@@ -217,6 +228,9 @@
         <p>Cart Count: <span id="cartCount">0</span></p>
         <ul id="cartList"></ul>
         <p>Total Price: AUD $<span id="totalPrice">0.00</span></p>
+        <button class="cancel-button" onclick="cancelOrder()">
+          Cancel Order
+        </button>
         <button onclick="confirmOrder()">Confirm Order</button>
       </section>
     </main>
@@ -283,6 +297,16 @@
 
       function confirmOrder() {
         alert("Order confirmed! Thank you for your purchase.");
+      }
+
+      function cancelOrder() {
+        // Cancel the order and clear the cart
+        clearCart();
+        // alert("Order canceled. Your cart is now empty.");
+      }
+      function clearCart() {
+        // Clear the contents of the cart
+        cart = [];
       }
     </script>
   </body>
