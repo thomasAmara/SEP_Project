@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Menu</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: #fff;
+      }
+
+      main {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+      }
+
+      section {
+        max-width: 800px;
+        margin: 20px;
+        padding: 20px;
+        padding-top: 40px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        flex: 1;
+        margin: 0 auto;
+      }
+
+      section:nth-child(1) {
+        background-color: #f0f0f0;
+        margin-top: 30px;
+      }
+
+      section:nth-child(2) {
+        background-color: #e0e0e0;
+        max-width: 300px;
+        margin-top: 30px;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 10px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      li:hover {
+        background-color: #f5f5f5;
+      }
+
+      footer {
+        /* max-width: 800px; */
+        margin: 20px;
+        padding: 20px;
+        background-color: #333;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        color: #fff;
+        text-align: center;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Our Food Menu</h1>
+    </header>
+
+    <main>
+      <section>
+        <h2>Starters</h2>
+        <ul id="startersList">
+          <li onclick="addToCart('Garlic Bread', 5.99)">
+            Garlic Bread - $5.99
+          </li>
+          <li onclick="addToCart('Caprese Salad', 7.99)">
+            Caprese Salad - $7.99
+          </li>
+          <li onclick="addToCart('Spinach Artichoke Dip', 8.99)">
+            Spinach Artichoke Dip - $8.99
+          </li>
+        </ul>
+
+        <h2>Main Courses</h2>
+        <ul>
+          <li onclick="addToCart('Chicken Alfredo', 14.99)">
+            Chicken Alfredo - $14.99
+          </li>
+          <li onclick="addToCart('Grilled Salmon', 16.99)">
+            Grilled Salmon - $16.99
+          </li>
+          <li onclick="addToCart('Vegetarian Pasta', 12.99)">
+            Vegetarian Pasta - $12.99
+          </li>
+        </ul>
+
+        <h2>Desserts</h2>
+        <ul>
+          <li onclick="addToCart('Chocolate Lava Cake', 6.99)">
+            Chocolate Lava Cake - $6.99
+          </li>
+          <li onclick="addToCart('Aussie Cheesecake', 8.99)">
+            Aussie Cheesecake - $8.99
+          </li>
+          <li onclick="addToCart('Fruit Sorbet', 12.99)">
+            Fruit Sorbet - $12.99
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h1>Your Cart</h1>
+        <p>Cart Count: <span id="cartCount">0</span></p>
+        <ul id="cartList"></ul>
+        <p>Total Price: AUD $<span id="totalPrice">0.00</span></p>
+        <button onclick="confirmOrder()">Confirm Order</button>
+      </section>
+    </main>
+
+    <footer>Project Done by Thomas, Sabrina and Abshikek</footer>
+    <script>
+      let cart = [];
+
+      function addToCart(productName, productPrice) {
+        const product = {
+          name: productName,
+          price: productPrice,
+        };
+
+        cart.push(product);
+        updateCartDisplay();
+      }
+
+      function updateCartDisplay() {
+        const cartCountElement = document.getElementById("cartCount");
+        const totalPriceElement = document.getElementById("totalPrice");
+        const cartList = document.getElementById("cartList");
+
+        cartCountElement.textContent = cart.length;
+        cartList.innerHTML = "";
+
+        cart.forEach((product) => {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${product.name} - $${product.price.toFixed(
+            2
+          )}`;
+          cartList.appendChild(listItem);
+        });
+
+        const totalPrice = cart.reduce(
+          (total, product) => total + product.price,
+          0
+        );
+        totalPriceElement.textContent = totalPrice.toFixed(2);
+      }
+
+      function confirmOrder() {
+        alert("Order confirmed! Thank you for your purchase.");
+      }
+    </script>
+  </body>
+</html>
