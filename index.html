@@ -61,6 +61,20 @@
         background-color: #45a049;
       }
 
+      button.remove-button {
+        background-color: #e74c3c; /* Red color, you can change it to your preferred color */
+        color: #fff;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        margin-left: 10px; /* Add some margin for spacing */
+      }
+
+      button.remove-button:hover {
+        background-color: #c0392b; /* Darker red color on hover */
+      }
+
       h2 {
         color: #333;
       }
@@ -99,14 +113,15 @@
   </head>
   <body>
     <header>
-      <h1>Our Food Menu</h1>
+      <h1>Food Menu</h1>
     </header>
 
     <main>
       <section>
+        <h2>Welcome</h2>
         <h2>Starters</h2>
         <ul id="startersList">
-          <li onclick="addToCart('Garlic Bread', 5.99)">
+          <li onclick="addToCart( 'Garlic Bread', 5.99)">
             Garlic Bread - $5.99
           </li>
           <li onclick="addToCart('Caprese Salad', 7.99)">
@@ -157,6 +172,18 @@
     <script>
       let cart = [];
 
+      let foodMenu = [
+        { name: "Garlic Bread", price: 5.99 },
+        { name: "Caprese Salad", price: 7.99 },
+        { name: "Spinach Artichoke Dip", price: 8.99 },
+        { name: "Chicken Alfredo", price: 14.99 },
+        { name: "Grilled Salmon", price: 16.99 },
+        { name: "Vegetarian Pasta", price: 12.99 },
+        { name: "Chocolate Lava Cake", price: 6.99 },
+        { name: "Aussie Cheesecake", price: 8.99 },
+        { name: "Fruit Sorbet", price: 12.99 },
+      ];
+
       function addToCart(productName, productPrice) {
         const product = {
           name: productName,
@@ -182,12 +209,13 @@
 
         cart.forEach((product) => {
           const listItem = document.createElement("li");
-          listItem.textContent = `${product.name} - $${product.price.toFixed(
+          listItem.textContent = ` ${product.name} - $${product.price.toFixed(
             2
           )}`;
 
           const removeButton = document.createElement("button");
           removeButton.textContent = "Remove";
+          removeButton.className = "remove-button";
           removeButton.onclick = () => removeFromCart(index);
           cartList.appendChild(listItem);
           listItem.appendChild(removeButton);
