@@ -153,7 +153,7 @@
       </section>
     </main>
 
-    <footer>Project Done by Thomas, Sabrina and Abshikek</footer>
+    <footer>Project Done by Thomas, Sabrina and Abhishek</footer>
     <script>
       let cart = [];
 
@@ -164,6 +164,11 @@
         };
 
         cart.push(product);
+        updateCartDisplay();
+      }
+
+      function removeFromCart(index) {
+        cart.splice(index, 1);
         updateCartDisplay();
       }
 
@@ -180,7 +185,12 @@
           listItem.textContent = `${product.name} - $${product.price.toFixed(
             2
           )}`;
+
+          const removeButton = document.createElement("button");
+          removeButton.textContent = "Remove";
+          removeButton.onclick = () => removeFromCart(index);
           cartList.appendChild(listItem);
+          listItem.appendChild(removeButton);
         });
 
         const totalPrice = cart.reduce(
